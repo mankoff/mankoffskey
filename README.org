@@ -2,6 +2,7 @@
 * Table of contents                               :toc_2:noexport:
   - [[#layout][Layout]]
   - [[#graphical-layout][Graphical layout]]
+  - [[#debugging][Debugging]]
   - [[#background][Background]]
 
 ** Layout
@@ -159,6 +160,13 @@ This PNG can be edited on https://drawio.png
 
 [[./lily58.drawio.png]]
 
+
+** Debugging
+
+#+BEGIN_SRC bash :exports both :results verbatim
+ls /dev/ttyACM*
+sudo screen /dev/ttyACM0 115200
+#+END_SRC
 
 ** Background
 + Adapted from: https://github.com/boardsource/pegBoards/tree/main/keyboards/kata0510-lily58-blok-L
