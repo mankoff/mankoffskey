@@ -1,3 +1,43 @@
+
+* Table of contents                               :toc_2:noexport:
+  - [[#layout][Layout]]
+  - [[#graphical-layout][Graphical layout]]
+  - [[#background][Background]]
+
+** Layout
+
+*** kb.py
+
+#+BEGIN_SRC python :tangle /media/${USER}/kb.py
+import board
+
+from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
+from kmk.scanners import DiodeOrientation
+
+# print(dir(board))
+class KMKKeyboard(_KMKKeyboard):
+    col_pins = (board.D27, board.D26, board.D22, board.D20, board.D23, board.D21)
+    row_pins = (board.D5, board.D6, board.D7, board.D8, board.D9)
+    diode_orientation = DiodeOrientation.COLUMNS
+    uart_pin = board.RX
+    rgb_pixel_pin = board.TX
+    data_pin = board.RX
+    i2c = board.I2C
+    SCL=board.SCL
+    SDA=board.SDA
+
+    coord_mapping = [
+    0,  1,  2,  3,  4,  5,           35, 34, 33, 32, 31, 30,
+    6,  7,  8,  9, 10, 11,           41, 40, 39, 38, 37, 36,
+    12, 13, 14, 15, 16, 17,          47, 46, 45, 44, 43, 42,
+    18, 19, 20, 21, 22, 23, 29,  59, 53, 52, 51, 50, 49, 48,
+              25, 26, 27, 28,       58, 57, 56, 55,
+    ]
+#+END_SRC
+
+*** main.py
+
+#+BEGIN_SRC python :tangle /media/${USER}/main.py
 from kb import KMKKeyboard
 from kmk.keys import KC
 from kmk.modules.layers import Layers
@@ -35,6 +75,7 @@ _______ = KC.TRNS
 XXXXXXX = KC.NO
 
 class DV:
+    # Build DV map for when host OS is in Dvorak mode
     # https://kmkfw.zulipchat.com/user_uploads/49575/-m7O9LXFqS9ilkgMYVT5D2Iz/dvorkeys-4110265058.png
     QUOT=KC.Q; COMM=KC.W; DOT=KC.E
     P=KC.R; Y=KC.T; F=KC.Y; G=KC.U; C=KC.I; R=KC.O; L=KC.P
@@ -49,14 +90,6 @@ class DV:
     PLUS=KC.LSFT(KC.RBRC); MINS=KC.QUOT
     COLN=KC.LSFT(KC.Z)
 
-
-# [ # n: desc
-#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
-#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
-#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
-#     _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______, _______, \
-#                            _______, _______, _______, _______,             _______, _______, _______, _______,
-# ],
 
 # http://kmkfw.io/docs/keycodes
 
@@ -105,5 +138,30 @@ keyboard.keymap = [
 
 ]
 
+# [ # n: desc
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______, _______, \
+#                            _______, _______, _______, _______,             _______, _______, _______, _______,
+# ],
+
+
 if __name__ == '__main__':
     keyboard.go(hid_type=HIDModes.USB)
+
+#+END_SRC
+
+
+** Graphical layout
+
+This PNG can be edited on https://drawio.png
+
+[[./lily58.drawio.png]]
+
+
+** Background
++ Adapted from: https://github.com/boardsource/pegBoards/tree/main/keyboards/kata0510-lily58-blok-L
++ Hardware: Lily58 from https://shop.beekeeb.com/ using Sea-Picro https://github.com/joshajohnson/sea-picro
+
+
