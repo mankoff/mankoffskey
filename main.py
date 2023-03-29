@@ -34,10 +34,6 @@ keyboard.modules.append(split)
 _______ = KC.TRNS
 XXXXXXX = KC.NO
 
-LOWER = KC.MO(1)
-RAISE = KC.MO(2)
-ADJUST = KC.LT(3, KC.SPC)
-
 class DV:
     # https://kmkfw.zulipchat.com/user_uploads/49575/-m7O9LXFqS9ilkgMYVT5D2Iz/dvorkeys-4110265058.png
     QUOT=KC.Q; COMM=KC.W; DOT=KC.E
