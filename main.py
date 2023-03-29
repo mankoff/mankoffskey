@@ -18,6 +18,12 @@ keyboard.extensions.append(MediaKeys())
 from kmk.modules.mouse_keys import MouseKeys
 keyboard.modules.append(MouseKeys())
 
+from kmk.modules.oneshot import OneShot
+oneshot = OneShot()
+# optional: set a custom tap timeout in ms (default: 1000ms)
+# oneshot.tap_time = 1500
+keyboard.modules.append(oneshot)
+
 # TODO Comment one of these on each side
 split_side = SplitSide.LEFT
 #split_side = SplitSide.RIGHT
@@ -89,8 +95,8 @@ keyboard.keymap = [
     _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, KC.PERC, _______,                         _______, KC.CIRC, _______, _______, _______, _______, \
     _______, KC.EXLM, KC.AMPR, KC.AT,   KC.HASH, _______,                          _______, KC.TILD, DV.SLSH, KC.PIPE, KC.BSLS, _______, \
-    _______, _______, _______, _______, KC.DLR,  _______, XXXXXXX,       XXXXXXX, _______, _______, KC.BSLS, _______, _______, _______, \
-                            XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
+    _______, _______, _______, _______, KC.DLR,  _______, KC.OS(KC.RALT), XXXXXXX, _______, _______, KC.BSLS, _______, _______, _______, \
+                            XXXXXXX, _______, _______, _______,               _______, _______, _______, XXXXXXX,
 ],
     
 [ # 4: Fn
