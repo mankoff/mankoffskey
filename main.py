@@ -15,6 +15,9 @@ keyboard.modules.append(modtap)
 from kmk.extensions.media_keys import MediaKeys
 keyboard.extensions.append(MediaKeys())
 
+from kmk.modules.mouse_keys import MouseKeys
+keyboard.modules.append(MouseKeys())
+
 # TODO Comment one of these on each side
 split_side = SplitSide.LEFT
 #split_side = SplitSide.RIGHT
@@ -30,6 +33,7 @@ RAISE = KC.MO(2)
 ADJUST = KC.LT(3, KC.SPC)
 
 class DV:
+    # https://kmkfw.zulipchat.com/user_uploads/49575/-m7O9LXFqS9ilkgMYVT5D2Iz/dvorkeys-4110265058.png
     QUOT=KC.Q; COMM=KC.W; DOT=KC.E
     P=KC.R; Y=KC.T; F=KC.Y; G=KC.U; C=KC.I; R=KC.O; L=KC.P
     A=KC.A; O=KC.S; E=KC.D; U=KC.F; I=KC.G; D=KC.H; H=KC.J; T=KC.K; N=KC.L; S=KC.SCLN
@@ -37,38 +41,65 @@ class DV:
     W=KC.COMM; V=KC.DOT; Z=KC.SLSH
     GRV=KC.GRV
 
+    LBRC=KC.MINS; RBRC=KC.EQL
+    LCBR=KC.UNDS; RCBR=KC.PLUS
+    SLSH=KC.LBRC; EQL=KC.RBRC
+    PLUS=KC.LSFT(KC.RBRC); MINS=KC.QUOT
+    COLN=KC.LSFT(KC.Z)
+
+
+# [ # n: desc
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+#     _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______, _______, \
+#                            _______, _______, _______, _______,             _______, _______, _______, _______,
+# ],
+
+# http://kmkfw.io/docs/keycodes
+
 keyboard.keymap = [
-    [  # Dvorak
-        KC.LT(3, KC.ESC), KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX,\
-        XXXXXXX, DV.COMM, DV.QUOT, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  XXXXXXX,\
-        XXXXXXX, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  XXXXXXX, \
-        XXXXXXX, DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, XXXXXXX,    XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX, \
-                              XXXXXXX, KC.ESC,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.SPACE, KC.BSPACE, XXXXXXX,
-    ],
 
-    [  # QWERTY
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
-        KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                         KC.Y,    KC.U,    KC.I,    KC.O,   KC.P,  KC.BSPC,\
-        KC.LCTL,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                         KC.H,    KC.J,    KC.K,    KC.L, KC.SCLN, KC.QUOT,\
-        KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B, XXXXXXX,      XXXXXXX,  KC.N,    KC.M, KC.COMM,  KC.DOT, KC.SLSH, KC.RSFT,\
-                                            KC.LGUI,   LOWER,  ADJUST,     KC.ENT,   RAISE,  KC.RALT,
-    ],
+[ # 0: Dvorak
+    KC.LT(4, KC.ESC), KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX,\
+    XXXXXXX, DV.COMM, DV.QUOT, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  XXXXXXX,\
+    XXXXXXX, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  XXXXXXX, \
+    XXXXXXX, DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, XXXXXXX,    XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX, \
+    KC.LT(1, KC.ESC), KC.LALT,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), XXXXXXX,
+],
+
+[ # 1: Nav
+    _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                      KC.MW_UP, _______, KC.UP,   _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                      KC.MW_DN, KC.LEFT, KC.DOWN, KC.RGHT, KC.MS_UP, _______, \
+    _______, _______, KC.PGUP, KC.PGDN, _______, _______, _______,    _______, _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
+                           _______, _______, _______, _______,             _______, _______, _______, _______,
+],
     
-    [  # LOWER
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
-        KC.ESC,   KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,                         KC.N6,   KC.N7,  KC.N8,   KC.N9,   KC.N0, KC.BSPC,\
-        KC.LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, XXXXXXX, XXXXXXX,\
-        KC.LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
-                                          XXXXXXX, KC.LGUI,   LOWER,  ADJUST,     KC.ENT,   RAISE,  KC.RALT, XXXXXXX,
-    ],
+[ # 2: Num
+    _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
+    _______, _______, DV.COMM, KC.LPRN, KC.RPRN, DV.SLSH,                         DV.PLUS, KC.N7, KC.N8, KC.N9, KC.N0, DV.PLUS, \
+    _______, _______, DV.DOT,  DV.LBRC, DV.RBRC, KC.ASTR,                         DV.MINS, KC.N4, KC.N5, KC.N6, KC.N0, DV.MINS, \
+    DV.COLN, _______, _______, DV.LCBR, DV.RCBR, KC.BSLS, XXXXXXX,       XXXXXXX, DV.EQL,  KC.N1, KC.N2, KC.N3, KC.N0, DV.COLN, \
+                           XXXXXXX, KC.SPC,  KC.BSPC, KC.LALT,             _______, _______, _______, XXXXXXX,
 
-    [ # 3: Fn
-        _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
-        _______, _______, _______, KC.VOLU, _______, _______,                         KC.F12, KC.F7, KC.F8, KC.F9, _______, _______, \
-        _______, _______, _______, KC.VOLD, _______, _______,                         KC.F11, KC.F4, KC.F5, KC.F6, _______, _______, \
-        _______, _______, _______, KC.MUTE, _______, _______,XXXXXXX,       XXXXXXX,  KC.F10, KC.F1, KC.F2, KC.F3, _______, _______, \
-                              XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
-    ],
+],
+
+[ # 3: Sym
+    _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, KC.VOLU, _______, _______,                         KC.F12, KC.F7, KC.F8, KC.F9, _______, _______, \
+    _______, _______, _______, KC.VOLD, _______, _______,                         KC.F11, KC.F4, KC.F5, KC.F6, _______, _______, \
+    _______, _______, _______, KC.MUTE, _______, _______,XXXXXXX,       XXXXXXX,  KC.F10, KC.F1, KC.F2, KC.F3, _______, _______, \
+    XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
+],
+    
+[ # 4: Fn
+    _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, KC.VOLU, _______, _______,                         KC.F12, KC.F7, KC.F8, KC.F9, _______, _______, \
+    _______, _______, _______, KC.VOLD, _______, _______,                         KC.F11, KC.F4, KC.F5, KC.F6, _______, _______, \
+    _______, _______, _______, KC.MUTE, _______, _______,XXXXXXX,       XXXXXXX,  KC.F10, KC.F1, KC.F2, KC.F3, _______, _______, \
+    XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
+],
 
 ]
 
