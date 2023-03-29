@@ -12,6 +12,9 @@ layers_ext = Layers()
 keyboard.modules.append(layers_ext)
 keyboard.modules.append(modtap)
 
+from kmk.extensions.media_keys import MediaKeys
+keyboard.extensions.append(MediaKeys())
+
 # TODO Comment one of these on each side
 split_side = SplitSide.LEFT
 #split_side = SplitSide.RIGHT
@@ -34,26 +37,9 @@ class DV:
     W=KC.COMM; V=KC.DOT; Z=KC.SLSH
     GRV=KC.GRV
 
-
- # /* DVORAK
- # * ,-----------------------------------------.                    ,-----------------------------------------.
- # * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
- # * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- # * | Tab  |   '  |   ,  |   .  |   P  |   Y  |                    |   F  |   G  |   C  |   R  |   L  |  MUP |
- # * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- # * |   /  |   A  |   O  |   E  |   U  |   I  |-------.    ,-------|   D  |   H  |   T  |   N  |   S  |  -   |
- # * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- # * |   ;  |   `  |   Q  |   J  |   K  |   X  |-------|    |-------|   B  |   M  |   W  |   V  |   Z  |  MDN |
- # * `-----------------------------------------/       /     \      \-----------------------------------------'
- # *                   |  NAV | LALT | LCTL | / ENT   /       \ SHFT \  |  SPC |BKSPC |      |
- # *                   |      |      |      |/       /         \      \ |[num] |[sym] |      |
- # *                   `----------------------------'           '------''--------------------'
- # */
-
-
 keyboard.keymap = [
     [  # Dvorak
-        XXXXXXX, KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX,\
+        KC.LT(3, KC.ESC), KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX,\
         XXXXXXX, DV.COMM, DV.QUOT, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  XXXXXXX,\
         XXXXXXX, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  XXXXXXX, \
         XXXXXXX, DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, XXXXXXX,    XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX, \
@@ -75,14 +61,15 @@ keyboard.keymap = [
         KC.LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
                                           XXXXXXX, KC.LGUI,   LOWER,  ADJUST,     KC.ENT,   RAISE,  KC.RALT, XXXXXXX,
     ],
-    
-    [  # RAISE
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
-        KC.ESC, KC.EXLM,   KC.AT, KC.HASH,  KC.DLR, KC.PERC,                         KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN, KC.RPRN, KC.BSPC,\
-        KC.LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC.MINS,  KC.EQL, KC.LCBR, KC.RCBR, KC.PIPE,  KC.GRV,\
-        KC.LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,   KC.UNDS, KC.PLUS, KC.LBRC, KC.RBRC, KC.BSLS, KC.TILD,\
-                                       XXXXXXX, KC.LGUI,   LOWER,  ADJUST,     KC.ENT,   RAISE,  KC.RALT, XXXXXXX,
-    ]
+
+    [ # 3: Fn
+        _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______, KC.VOLU, _______, _______,                         KC.F12, KC.F7, KC.F8, KC.F9, _______, _______, \
+        _______, _______, _______, KC.VOLD, _______, _______,                         KC.F11, KC.F4, KC.F5, KC.F6, _______, _______, \
+        _______, _______, _______, KC.MUTE, _______, _______,XXXXXXX,       XXXXXXX,  KC.F10, KC.F1, KC.F2, KC.F3, _______, _______, \
+                              XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
+    ],
+
 ]
 
 if __name__ == '__main__':
