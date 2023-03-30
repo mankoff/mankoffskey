@@ -99,11 +99,11 @@ class DV:
 keyboard.keymap = [
 
 [ # 0: Dvorak
-    KC.LT(4, KC.ESC), KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX,\
-    XXXXXXX, DV.COMM, DV.QUOT, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  XXXXXXX,\
-    XXXXXXX, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  XXXXXXX, \
-    XXXXXXX, DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, XXXXXXX,    XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX, \
-    KC.LT(1, KC.ESC), KC.LALT,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), XXXXXXX,
+    KC.LT(4, KC.ESC), KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, XXXXXXX, \
+    KC.TAB,           DV.COMM, DV.QUOT, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  XXXXXXX, \
+    XXXXXXX,          DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  DV.SLSH, \
+    XXXXXXX,          DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, XXXXXXX,    XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX, \
+                        KC.LT(1, KC.LGUI), KC.LALT,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), XXXXXXX,
 ],
 
 [ # 1: Nav
