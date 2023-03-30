@@ -103,7 +103,7 @@ keyboard.keymap = [
     KC.TAB,           DV.QUOT, DV.COMM, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  DV.SLSH, \
     XXXXXXX,          DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  DV.MINS, \
     XXXXXXX,          DV.GRV,  DV.Q,    DV.J,    DV.K,    DV.X, KC.TT(1),   XXXXXXX, DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  DV.SLSH,  \
-                                KC.LGUI, KC.LALT,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), XXXXXXX,
+                                KC.LGUI, KC.LALT,  KC.LCTL,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), KC.DEL,
 ],
 
 [ # 1: Nav
