@@ -4,6 +4,8 @@
   - [[#graphical-layout][Graphical layout]]
   - [[#debugging][Debugging]]
   - [[#background][Background]]
+  - [[#is-it-attached][Is it attached?]]
+  - [[#auto-mount-when-plugged-in][Auto-mount when plugged in]]
 
 ** Layout
 
@@ -294,3 +296,46 @@ sudo screen /dev/ttyACM0 115200
 + Hardware: Lily58 from https://shop.beekeeb.com/ using Sea-Picro https://github.com/joshajohnson/sea-picro
 
 
+** Is it attached?
+
+#+BEGIN_SRC bash :exports both :results verbatim
+ls /media/kdm/
+echo ""
+ls /media/kdm/CIRCUITPY
+#+END_SRC
+
+#+RESULTS:
+: CIRCUITPY
+: 
+: boot_out.txt
+: kb.py
+: kmk
+: main.py
+
+** Auto-mount when plugged in
+
+#+BEGIN_SRC bash :exports both :results verbatim
+cat /etc/fstab
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/vgkubuntu-root /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/nvme0n1p2 during installation
+UUID=3550e9b4-85b0-4996-9ca3-740c0ef22e78 /boot           ext4    defaults        0       2
+# /boot/efi was on /dev/nvme0n1p1 during installation
+UUID=B298-D0CC  /boot/efi       vfat    umask=0077      0       1
+/dev/mapper/vgkubuntu-swap_1 none            swap    sw              0       0
+
+/dev/mapper/sda1_crypt /home ext4 defaults 0 2
+
+# sudo blkid
+UUID=F6AB-6D5A	/media/kdm/CIRCUITPY	vfat	nofail,user	0	0
+#+end_example
