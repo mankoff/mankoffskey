@@ -66,12 +66,6 @@ keyboard.extensions.append(MediaKeys())
 from kmk.modules.mouse_keys import MouseKeys
 keyboard.modules.append(MouseKeys())
 
-from kmk.modules.holdtap import HoldTap
-holdtap = HoldTap()
-# optional: set a custom tap timeout in ms
-# holdtap.tap_time = 300
-keyboard.modules.append(holdtap)
-
 from kmk.modules.oneshot import OneShot
 oneshot = OneShot()
 # optional: set a custom tap timeout in ms (default: 1000ms)
@@ -83,7 +77,6 @@ split_side = SplitSide.LEFT
 #split_side = SplitSide.RIGHT
 split = Split(split_side = split_side,use_pio=True)
 keyboard.modules.append(split)
-
 
 # Cleaner key names
 _______ = KC.TRNS
@@ -114,24 +107,24 @@ keyboard.keymap = [
     DV.GRV,  KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, KC.BSPACE, \
     KC.TAB,  DV.QUOT, DV.COMM, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  DV.SLSH, \
     KC.LCTL, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  DV.MINS, \
-    KC.LSFT, DV.SCLN, DV.Q,    DV.J,    DV.K,    DV.X, KC.TT(1), KC.LT(4, KC.ESC), DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX,  \
+    KC.LSFT, DV.SCLN, DV.Q,    DV.J,    DV.K,    DV.X, KC.LT(1, _______), KC.LT(4, KC.ESC), DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX,  \
                         KC.LT(4,_______), KC.LGUI,  KC.LALT,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), KC.DEL,
 ],
 
 [ # 1: Nav
-    _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \ 
+    _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______,                      KC.MW_UP, _______, KC.UP,   _______, _______, _______, \
     _______, _______, _______, _______, _______, KC.PGUP,                      KC.MW_DN, KC.LEFT, KC.DOWN, KC.RGHT, KC.MS_UP, _______, \
-    _______, _______, KC.PGUP, KC.PGDN, _______, KC.PGDN, _______,    KC.TO(0), _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
+    _______, _______, KC.PGUP, KC.PGDN, _______, KC.PGDN, _______,    _______, _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
                            _______, _______, _______, _______,             _______, KC.MB_MMB, KC.MB_LMB, KC.MB_RMB,
 ],
     
 [ # 2: Num
-    KC.TO(2), _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                         _______, _______, _______, _______, _______, _______, \
     _______, _______, DV.COMM, KC.LPRN, KC.RPRN, DV.SLSH,                         DV.PLUS, KC.N7, KC.N8, KC.N9, KC.N0, DV.PLUS, \
     _______, _______, DV.DOT,  DV.LBRC, DV.RBRC, KC.ASTR,                         DV.MINS, KC.N4, KC.N5, KC.N6, KC.N0, DV.MINS, \
-    DV.COLN, _______, _______, DV.LCBR, DV.RCBR, KC.BSLS, XXXXXXX,      KC.TO(0), DV.EQL,  KC.N1, KC.N2, KC.N3, KC.N0, DV.COLN, \
-                           XXXXXXX, KC.SPC,  KC.BSPC, KC.LALT,             _______, _______, KC.SPACE, XXXXXXX,
+    DV.COLN, _______, _______, DV.LCBR, DV.RCBR, KC.BSLS, XXXXXXX,       XXXXXXX, DV.EQL,  KC.N1, KC.N2, KC.N3, KC.N0, DV.COLN, \
+                           XXXXXXX, KC.SPC,  KC.BSPC, KC.LALT,             _______, _______, _______, XXXXXXX,
 
 ],
 
@@ -170,7 +163,7 @@ if __name__ == '__main__':
 
 
 *** WAITING First attempt
-#+BEGIN_SRC python :tangle no
+#+BEGIN_SRC python :tangle nil
 from kb import KMKKeyboard
 from kmk.keys import KC
 from kmk.modules.layers import Layers
