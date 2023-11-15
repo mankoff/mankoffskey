@@ -107,7 +107,7 @@ keyboard.keymap = [
     DV.GRV,  KC.N1,   KC.N2,   KC.N3,  KC.N4,    KC.N5,                     KC.N6, KC.N7, KC.N8, KC.N9, KC.N0, KC.BSPACE, \
     KC.TAB,  DV.QUOT, DV.COMM, DV.DOT,  DV.P,    DV.Y,                      DV.F,  DV.G,  DV.C,  DV.R,  DV.L,  DV.SLSH, \
     KC.LCTL, DV.A,    DV.O,    DV.E,    DV.U,    DV.I,                      DV.D,  DV.H,  DV.T,  DV.N,  DV.S,  DV.MINS, \
-    KC.LSFT, DV.SCLN, DV.Q,    DV.J,    DV.K,    DV.X, KC.LT(1, _______), KC.LT(4, KC.ESC), DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX,  \
+    KC.LSFT, DV.SCLN, DV.Q,    DV.J,    DV.K,    DV.X, KC.TT(1), KC.LT(4, KC.ESC), DV.B,  DV.M,  DV.W,  DV.V,  DV.Z,  XXXXXXX,  \
                         KC.LT(4,_______), KC.LGUI,  KC.LALT,  KC.ENT,          KC.LSFT, KC.LT(2, KC.SPACE), KC.LT(3, KC.BSPACE), KC.DEL,
 ],
 
@@ -115,7 +115,7 @@ keyboard.keymap = [
     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______,                      KC.MW_UP, _______, KC.UP,   _______, _______, _______, \
     _______, _______, _______, _______, _______, KC.PGUP,                      KC.MW_DN, KC.LEFT, KC.DOWN, KC.RGHT, KC.MS_UP, _______, \
-    _______, _______, KC.PGUP, KC.PGDN, _______, KC.PGDN, _______,    _______, _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
+    _______, _______, KC.PGUP, KC.PGDN, _______, KC.PGDN, _______,    KC.TO(0), _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
                            _______, _______, _______, _______,             _______, KC.MB_MMB, KC.MB_LMB, KC.MB_RMB,
 ],
     
