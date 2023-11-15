@@ -163,7 +163,7 @@ if __name__ == '__main__':
 
 
 *** WAITING First attempt
-#+BEGIN_SRC python :tangle nil
+#+BEGIN_SRC python :tangle no
 from kb import KMKKeyboard
 from kmk.keys import KC
 from kmk.modules.layers import Layers
