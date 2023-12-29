@@ -167,13 +167,97 @@ This PNG can be edited on https://drawio.png
 
 [[./lily58.drawio.png]]
 
+* Heatmap
 
-* Debugging
+** Capture
+#+BEGIN_SRC bash :exports both :results verbatim
+
+# turn on debugging:
+# keyboard.debug_enabled = True # in main.py
+
+# capture everything
+cat < /dev/ttyACM0 |grep pressed >> logfile 
+#+END_SRC
+
+** Process
 
 #+BEGIN_SRC bash :exports both :results verbatim
-ls /dev/ttyACM*
-sudo screen /dev/ttyACM0 115200
+grep -Eo 'pressed={[0-9].*|key_number\ [0-9].*' ~/logfile|cut -d":" -f1|grep -o "[[:digit:]]*"|sort|uniq -c | sort -n > ~/logfile.sort
+head ~/logfile.sort
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+      5 35
+     12 48
+     14 5
+     14 55
+     21 21
+     28 34
+     34 4
+     36 3
+     37 49
+     40 59
+#+end_example
+
+#+BEGIN_SRC jupyter-python :exports both
+import numpy as np
+import pandas as pd
+
+# coord_mapping = [
+# 0,  1,  2,  3,  4,  5,           35, 34, 33, 32, 31, 30,
+# 6,  7,  8,  9, 10, 11,           41, 40, 39, 38, 37, 36,
+# 12, 13, 14, 15, 16, 17,          47, 46, 45, 44, 43, 42,
+# 18, 19, 20, 21, 22, 23, 29,  59, 53, 52, 51, 50, 49, 48,
+#           25, 26, 27, 28,       58, 57, 56, 55,
+# ]
+
+df = pd.read_csv('~/logfile.sort', sep='\s+', header=None, index_col=1)
+# df.head()
+
+left_dict = {0:(0,0),1:(0,1),2:(0,2),3:(0,3),4:(0,4),5:(0,5),
+             6:(1,0),7:(1,1),8:(1,2),9:(1,3),10:(1,4),11:(1,5),
+             12:(2,0),13:(2,1),14:(2,2),15:(2,3),16:(2,4),17:(2,5),
+             18:(3,0),19:(3,1),20:(3,2),21:(3,3),22:(3,4),23:(3,5),29:(3,6),
+                                      25:(4,3),26:(4,4),27:(4,5),28:(4,6)}
+
+right_dict = {35:(0,1),34:(0,2),33:(0,3),32:(0,4),31:(0,5),30:(0,6),
+              41:(1,1),40:(1,2),39:(1,3),38:(1,4),37:(1,5),36:(1,6),
+              47:(2,1),46:(2,2),45:(2,3),44:(2,4),43:(2,5),42:(2,6),
+     59:(3,0),53:(3,1),52:(3,2),51:(3,3),50:(3,4),49:(3,5),48:(3,6),
+      58:(4,0),57:(4,1),56:(4,2),55:(4,3)}
+
+left = np.zeros((7,5)).T
+right = np.zeros_like(left)
+
+for key in df.index:
+     if key <= 29:
+          x,y = left_dict[key]
+          left[x,y] = df.loc[key].values[0]
+     else:
+          x,y = right_dict[key]
+          right[x,y] = df.loc[key].values[0]
+
+left[left == 0] = np.nan          
+right[right == 0] = np.nan          
+
+merge = np.hstack((left,right))
+import matplotlib.pyplot as plt
+plt.imshow(np.log10(merge))
+plt.colorbar(fraction=0.017, pad=0.02, label='log$_{10}$ press count [#]')
+
+for y in range(merge.shape[0]):
+     for x in range(merge.shape[1]):
+          val = merge[y,x]
+          if ~np.isnan(val):
+               plt.text(x-0.33,y,str(int(val)), color='w', horizontalalignment='left')
+
+plt.savefig('/home/kdm/projects/KB/mankoffskey/heatmap.png')
+#+END_SRC
+
+#+RESULTS:
+[[file:./figs_tmp/ca93a925160bc526a351365f460c5306df2479d6.png]]
+
 
 * Background
 + Adapted from: https://github.com/boardsource/pegBoards/tree/main/keyboards/kata0510-lily58-blok-L
