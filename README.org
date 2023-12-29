@@ -4,7 +4,9 @@
   - [[#kbpy][kb.py]]
   - [[#mainpy][main.py]]
 - [[#graphical-layout][Graphical layout]]
-- [[#debugging][Debugging]]
+- [[#heatmap][Heatmap]]
+  - [[#capture][Capture]]
+  - [[#process][Process]]
 - [[#background][Background]]
 - [[#is-it-attached][Is it attached?]]
 - [[#auto-mount-when-plugged-in][Auto-mount when plugged in]]
@@ -81,6 +83,9 @@ keyboard.modules.append(split)
 _______ = KC.TRNS
 XXXXXXX = KC.NO
 
+keyboard.debug_enabled = True
+
+
 class DV:
     # Build DV map for when host OS is in Dvorak mode
     # https://kmkfw.zulipchat.com/user_uploads/49575/-m7O9LXFqS9ilkgMYVT5D2Iz/dvorkeys-4110265058.png
@@ -97,6 +102,21 @@ class DV:
     PLUS=KC.LSFT(KC.RBRC); MINS=KC.QUOT
     COLN=KC.LSFT(KC.Z)
 
+# class DV:
+#     # Build DV map for when host OS is in QWERTY mode
+#     QUOT=KC.QUOT; COMM=KC.COMM; DOT=KC.DOT
+#     P=KC.P; Y=KC.Y; F=KC.F; G=KC.G; C=KC.C; R=KC.R; L=KC.L
+#     A=KC.A; O=KC.O; E=KC.E; U=KC.U; I=KC.I; D=KC.D; H=KC.H; T=KC.T; N=KC.N; S=KC.S
+#     SCLN=KC.SCLN; Q=KC.Q; J=KC.J; K=KC.K; X=KC.X; B=KC.B; M=KC.M
+#     W=KC.W; V=KC.V; Z=KC.Z
+#     GRV=KC.GRV
+
+#     LBRC=KC.LBRC; RBRC=KC.RBRC
+#     LCBR=KC.LCBR; RCBR=KC.RCBR
+#     SLSH=KC.SLSH; EQL=KC.EQL
+#     PLUS=KC.PLUS; MINS=KC.MINS
+#     COLN=KC.COLN
+    
 
 # http://kmkfw.io/docs/keycodes
 
