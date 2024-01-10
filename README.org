@@ -116,7 +116,12 @@ class DV:
 #     SLSH=KC.SLSH; EQL=KC.EQL
 #     PLUS=KC.PLUS; MINS=KC.MINS
 #     COLN=KC.COLN
-    
+
+class PV:
+    # Paraview. See Edit (menu) > Settings... > Camera > 3D Interaction Options
+    ROT = KC.MB_LMB; PAN = KC.MB_MMB; ZOOM = KC.MB_RMB
+    ROLL = KC.LSFT(KC.MB_LMB); MULTIROT = KC.LSFT(KC.MB_MMB); SKYBOXROT = KC.LCTL(KC.MB_LMB)
+    ZOOMMOUSE = KC.LECTL(KC.MB_RMB)
 
 # http://kmkfw.io/docs/keycodes
 
@@ -131,7 +136,7 @@ keyboard.keymap = [
 ],
 
 [ # 1: Nav
-    _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+    KC.TO(5), _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______,                      KC.MW_UP, _______, KC.UP,   _______, _______, _______, \
     _______, _______, _______, _______, _______, KC.PGUP,                      KC.MW_DN, KC.LEFT, KC.DOWN, KC.RGHT, KC.MS_UP, _______, \
     _______, _______, KC.PGUP, KC.PGDN, _______, KC.PGDN, _______,    KC.TO(0), _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
@@ -163,7 +168,17 @@ keyboard.keymap = [
     XXXXXXX, _______, _______, _______,             _______, _______, _______, XXXXXXX,
 ],
 
-]
+
+[ # 5: Paraview
+    # ROT = KC.MB_LMB; PAN = KC.MB_MMB; ZOOM = KC.MB_RMB
+    # ROLL = KC.LSFT(KC.MB_LMB); MULTIROT = KC.LSFT(KC.MB_MMB); SKYBOXROT = KC.LCTL(KC.MB_LMB)
+    # ZOOMMOUSE = KC.LECTL(KC.MB_RMB)
+    _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, PV.ZOOMMOUSE, PV.ZOOM, _______,                KC.MW_UP, _______, KC.UP,   _______, _______, _______, \
+    _______, _______, PV.SKYBOXROT, PV.PAN,  PV.ROT,  _______,                KC.MW_DN, KC.LEFT, KC.DOWN, KC.RGHT, KC.MS_UP, _______, \
+    _______, _______, _______, PV.MULTIROT, PV.ROLL, _______, _______,    KC.TO(0), _______, _______, _______, KC.MS_LT, KC.MS_DN, KC.MS_RT, \
+                           _______, _______, _______, _______,             _______, KC.MB_MMB, KC.MB_LMB, KC.MB_RMB,
+],
 
 # [ # n: desc
 #     _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______, \
@@ -173,6 +188,7 @@ keyboard.keymap = [
 #                            _______, _______, _______, _______,             _______, _______, _______, _______,
 # ],
 
+]
 
 if __name__ == '__main__':
     keyboard.go(hid_type=HIDModes.USB)
